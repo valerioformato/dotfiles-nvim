@@ -7,7 +7,18 @@ return {
     },
 
     config = function()
-        require('telescope').setup({})
+        require('telescope').setup{
+	  defaults = {
+		    vimgrep_arguments = {
+		      'rg',
+		      '--no-heading',
+		      '--with-filename',
+		      '--line-number',
+		      '--column',
+		      '--smart-case',
+		      '--hidden',
+	    }}
+    }
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
