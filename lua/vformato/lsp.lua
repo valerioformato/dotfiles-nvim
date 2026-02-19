@@ -1,11 +1,23 @@
 -- Reserve a space in the gutter
 vim.opt.signcolumn = 'yes'
 
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+})
+
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+    end
+
     local opts = {buffer = event.buf}
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
@@ -31,6 +43,11 @@ vim.lsp.config['lua_ls'] = {
   filetypes = { 'lua' },
   root_markers = { '.luarc.json', '.luarc.jsonc', '.git' },
   capabilities = capabilities,
+  settings = {
+    Lua = {
+      hint = { enable = true },
+    },
+  },
 }
 
 -- Configure clangd for C/C++
