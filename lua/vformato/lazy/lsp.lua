@@ -48,6 +48,7 @@ return {
 					{ 'python-lsp-server', auto_update = true },
 					{ 'rust-analyzer', auto_update = true },
 					{ 'shfmt', auto_update = true },
+					{ 'yaml-language-server', auto_update = true },
 				}
 			}
 		end

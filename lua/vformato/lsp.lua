@@ -14,9 +14,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
-    end
 
     local opts = {buffer = event.buf}
 
@@ -92,7 +89,15 @@ vim.lsp.config['bashls'] = {
   capabilities = capabilities,
 }
 
-vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls' })
+-- Configure yaml-language-server
+vim.lsp.config['yamlls'] = {
+  cmd = { 'node', vim.fn.stdpath('data') .. '/mason/packages/yaml-language-server/node_modules/yaml-language-server/bin/yaml-language-server', '--stdio' },
+  filetypes = { 'yaml', 'yaml.docker-compose' },
+  root_markers = { '.git' },
+  capabilities = capabilities,
+}
+
+vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls', 'yamlls' })
 
 -- Format on save
 vim.api.nvim_create_autocmd('BufWritePre', {
