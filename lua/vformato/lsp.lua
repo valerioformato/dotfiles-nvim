@@ -97,7 +97,15 @@ vim.lsp.config['yamlls'] = {
   capabilities = capabilities,
 }
 
-vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls', 'yamlls' })
+-- Configure ansible-language-server
+vim.lsp.config['ansible-language-server'] = {
+  cmd = { mason_bin .. 'ansible-language-server', '--stdio' },
+  filetypes = { 'yaml' },
+  root_markers = { '.git' },
+  capabilities = capabilities,
+}
+
+vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls', 'yamlls', 'ansible-language-server' })
 
 -- Format on save
 vim.api.nvim_create_autocmd('BufWritePre', {
