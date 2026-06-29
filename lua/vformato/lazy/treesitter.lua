@@ -3,7 +3,7 @@ return {
   build = ":TSUpdate",
   opts = {
     ensure_installed = {
-      "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "python", "typescript"
+      "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "markdown", "python", "typescript"
     },
     sync_install = false,
     highlight = { enable = true },

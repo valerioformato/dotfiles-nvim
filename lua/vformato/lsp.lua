@@ -105,7 +105,14 @@ vim.lsp.config['ansible-language-server'] = {
   capabilities = capabilities,
 }
 
-vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls', 'yamlls', 'ansible-language-server' })
+vim.lsp.config['markdown_oxide'] = {
+  cmd = { mason_bin .. 'markdown-oxide' },
+  filetypes = { 'markdown', 'markdown.mdx' },
+  root_markers = { '.git' },
+  capabilities = capabilities,
+}
+
+vim.lsp.enable({ 'lua_ls', 'clangd', 'cmake', 'bashls', 'yamlls', 'ansible-language-server', 'markdown-oxide' })
 
 -- Format on save
 vim.api.nvim_create_autocmd('BufWritePre', {
